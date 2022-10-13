@@ -28,54 +28,54 @@ echo "127.0.1.1 arch.localdomain arch" >> /etc/hosts
 echo root:"$ROOTPAS" | chpasswd
 
 # install packages for booting
-pacman -S grub grub-btrfs efibootmgr
+pacman --noconfirm -S grub grub-btrfs efibootmgr
 
 # install packages for network
-pacman -S networkmanager network-manager-applet wpa_supplicant
+pacman --noconfirm -S networkmanager network-manager-applet wpa_supplicant
 
 # install DOS filesystem utilities & disk tools
-pacman -S mtools dosfstools os-prober
+pacman --noconfirm -S mtools dosfstools os-prober
 
 # install shell dialog box, arch mirrorlist
-pacman -S dialog reflector
+pacman --noconfirm -S dialog reflector
 
 # install linux system group packages
-pacman -S base-devel linux-headers
+pacman --noconfirm -S linux-headers
 
 # install user directories & command line tools
-pacman -S xdg-user-dirs xdg-utils
+pacman --noconfirm -S xdg-user-dirs xdg-utils
 
 # install additional support network & dns packages, service discovery tools
-# pacman -S nfs-utils inetutils dnsutils openbsd-netcat iptables-nft ipset nss-mdns avahi
+# pacman --noconfirm -S nfs-utils inetutils dnsutils openbsd-netcat iptables-nft ipset nss-mdns avahi
 
 # install bluetooth protocol stack packages
-pacman -S bluez bluez-utils
+pacman --noconfirm -S bluez bluez-utils
 
 # install support packages & drivers for printers
-# pacman -S cups hplip
+# pacman --noconfirm -S cups hplip
 
 # install sound system packages
-pacman -S alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol
+pacman --noconfirm -S alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol
 
 # install SSH protocol support & sync packages
-pacman -S openssh rsync
+pacman --noconfirm -S openssh rsync
 
 # install support for  battery, power, and thermals
-pacman -S acpi acpi_call tlp acpid
+pacman --noconfirm -S acpi acpi_call tlp acpid
 
 # install support for Virtual machines & emulators
 # virt-manager qemu qemu-arch-extra edk2-ovmf bridge-utils dnsmasq vde2
 
 # install firewall support
-pacman -S firewalld
+pacman --noconfirm -S firewalld
 
 # install GRUB as bootloader
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # For Discrete Graphics Cards
-pacman -S --noconfirm xf86-video-amdgpu
-# pacman -S --noconfirm nvidia nvidia-utils nvidia-settings
+pacman --noconfirm -S --noconfirm xf86-video-amdgpu
+# pacman --noconfirm -S --noconfirm nvidia nvidia-utils nvidia-settings
 
 # enable services to always start at system boot
 systemctl enable NetworkManager
@@ -95,7 +95,7 @@ systemctl enable acpid
 
 # add user and give priviliges
 useradd -m "$USERNAME" 
-echo "$USERNAME":"USERNAMEPAS" | chpasswd
+echo "$USERNAME":"$USERNAMEPAS" | chpasswd
 usermod -aG wheel "$USERNAME" 
 
 # give user ownership for virtualization
