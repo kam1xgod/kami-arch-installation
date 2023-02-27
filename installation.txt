@@ -1,5 +1,5 @@
 1. create partitions.
-	I often do 1 boot and 1 fs.
+	I often do 1 boot (~500MB) and 1 fs (available space -2.5G (.5 for boot, 2G for zram)).
 2. create filesystems in them with 'mkfs.*'.
 	vfat for boot and btrfs for another.
 3. mount in second partition and create subvolumes for btrfs: @home and @var.
@@ -22,7 +22,7 @@
           Option "XkbLayout" "us,ru"
           Option "XkbOptions" "grp:alt_shift_toggle"
     EndSection
-16. /etc/X11/xorg.conf.d/70-synaptics.conf:
+16. /etc/X11/xorg.conf.d/70-synaptics.conf (or 30-touchpad.conf - this works for me):
     Section "InputClass"
         Identifier "touchpad"
         Driver "synaptics"
@@ -42,11 +42,12 @@
             Option "FingerLow" "30"
             Option "FingerHigh" "50"
             Option "MaxTapTime" "125"
+            Option "NaturalScrolling" "true"
     EndSection
 17. scrot -s ~/Pictures/screenshots/%Y-%m-%d-%T-screenshot.png -e 'xclip -selection clipboard -target image/png -i $f' for screenshots.
 18. xfce-polkit if using i3.
 19. xfce4-power-manager.
 20. cpupower-gui and cpupower.
 21. paru.
-22. 
-
+22. sudo reflector --verbose --country 'India' -l 5 --sort rate --save /etc/pacman.d/mirrorlist
+23. 
